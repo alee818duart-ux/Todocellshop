@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo Cell Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    /* FONDO CON LOGOS REPETIDOS */
+    .background {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-image: url('logo.png');
+      background-repeat: repeat;
+      background-size: 120px;
+      opacity: 0.2;
+      z-index: 0;
+      background-color: #000;
+    }
+
+    /* SPLASH LOGO */
+    .splash {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.7);
+      z-index: 2;
+      animation: fadeOut 2s ease forwards;
+      animation-delay: 2s;
+    }
+
+    .splash img {
+      width: 280px;
+      height: 280px;
+      object-fit: contain;
+      border-radius: 50%;
+      animation: fadeIn 1s ease;
+    }
+
+    /* CONTENIDO PRINCIPAL */
+    .main {
+      opacity: 0;
+      z-index: 1;
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: showMain 1s ease forwards;
+      animation-delay: 3s;
+    }
+
+    .buttons {
+      width: 80%;
+      max-width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .btn {
+      text-decoration: none;
+      text-align: center;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: 0.3s;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* BANDERA ARGENTINA DETRÁS DEL TEXTO */
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url('bandera-argentina.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.3; /* semi-transparente */
+      z-index: 0;
+    }
+
+    .btn span {
+      position: relative;
+      z-index: 1; /* texto encima del fondo */
+    }
+
+    .instagram { background-color: #E1306C; }
+    .whatsapp { background-color: #25D366; }
+    .calificar { background-color: #4285F4; }
+
+    .btn:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+
+    /* ANIMACIONES */
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes showMain {
+      to { opacity: 1; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="background"></div>
+
+  <!-- LOGO INICIAL -->
+  <div class="splash">
+    <img src="logo.png" alt="Logo">
+  </div>
+
+  <!-- BOTONES -->
+  <div class="main">
+    <div class="buttons">
+      <a href="https://www.instagram.com/todocellshop?igsh=YjNlbzV1OHY0Yzk0" target="_blank" class="btn instagram">
+        <span>Instagram</span>
+      </a>
+
+      <a href="https://wa.me/message/VSOKBXLUE27CI1" target="_blank" class="btn whatsapp">
+        <span>WhatsApp</span>
+      </a>
+
+      <a href="https://www.google.com/maps/place/Todo+Cell+Suc.+Guernica/@-34.9170862,-58.3750529,17z/data=!4m8!3m7!1s0x95bd2acba59bfc8b:0x4ae8ae1a5536644f!8m2!3d-34.9170862!4d-58.3750529!9m1!1b1!16s%2Fg%2F11b7ldm55p!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn calificar">
+        <span>Calificar</span>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
