@@ -1,158 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Todo Cell Shop</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Todo Cell Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  background: url('fondo-pc.jpg') no-repeat center center;
+  background-size: cover;
+}
 
-      /* FONDO POR DEFECTO (PC) */
-      background: url('fondo-pc.jpg') no-repeat center center;
-      background-size: cover;
-    }
+@media (max-width: 768px) {
+  body {
+    background: url('fondo-mobile.jpg') no-repeat center center;
+    background-size: cover;
+  }
+}
 
-    /* FONDO PARA CELULAR */
-    @media (max-width: 768px) {
-      body {
-        background: url('fondo-mobile.jpg') no-repeat center center;
-        background-size: cover;
-      }
-    }
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.55);
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
 
-    /* CAPA OSCURA */
-    body::before {
-      content: "";
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.55);
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
+.splash {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.7);
+  z-index: 2;
+  animation: fadeOut 2s ease forwards;
+  animation-delay: 2s;
+}
 
-    /* SPLASH */
-    .splash {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.7);
-      z-index: 2;
-      animation: fadeOut 2s ease forwards;
-      animation-delay: 2s;
-    }
+.splash img {
+  width: 280px;
+  height: 280px;
+  object-fit: contain;
+  border-radius: 50%;
+}
 
-    .splash img {
-      width: 280px;
-      height: 280px;
-      object-fit: contain;
-      border-radius: 50%;
-    }
+.main {
+  opacity: 0;
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: showMain 1s ease forwards;
+  animation-delay: 3s;
+}
 
-    /* CONTENIDO */
-    .main {
-      opacity: 0;
-      position: relative;
-      z-index: 1;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: showMain 1s ease forwards;
-      animation-delay: 3s;
-    }
+.buttons {
+  width: 80%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
-    .buttons {
-      width: 80%;
-      max-width: 320px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
+/* BOTONES */
+.btn {
+  text-decoration: none;
+  text-align: center;
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
 
-    .btn {
-      text-decoration: none;
-      text-align: center;
-      padding: 16px;
-      border-radius: 14px;
-      font-size: 18px;
-      font-weight: bold;
-      color: white;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(5px);
-    }
+.btn span {
+  position: relative;
+  z-index: 2;
+}
 
-    /* BANDERA */
-    .btn::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: url('bandera-argentina.png');
-      background-size: cover;
-      opacity: 0.25;
-    }
+.instagram {
+  background-color: #E1306C;
+}
 
-    .btn span {
-      position: relative;
-      z-index: 1;
-    }
+.whatsapp {
+  background-color: #1A9E42; /* un verde más oscuro para que los iconos resalten */
+}
 
-    .instagram { background-color: #E1306C; }
-    .whatsapp { background-color: #25D366; }
-    .calificar { background-color: #4285F4; }
+.calificar {
+  background-color: #4285F4;
+}
 
-    .btn:hover {
-      transform: scale(1.05);
-      transition: 0.3s;
-    }
+/* Hover */
+.btn:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
+}
 
-    /* ANIMACIONES */
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
-    }
+/* Animaciones */
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+@keyframes showMain {
+  to { opacity: 1; }
+}
 
-    @keyframes showMain {
-      to { opacity: 1; }
-    }
-
-  </style>
+/* Iconos dispersos */
+.icono {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.7;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- LOGO INICIAL -->
-  <div class="splash">
-    <img src="logo.png" alt="Logo">
+<div class="splash">
+  <img src="logo.png" alt="Logo">
+</div>
+
+<div class="main">
+  <div class="buttons">
+    <a href="https://www.instagram.com/todocellshop?igsh=YjNlbzV1OHY0Yzk0" target="_blank" class="btn instagram">
+      <span>Instagram</span>
+    </a>
+
+    <a href="https://wa.me/message/VSOKBXLUE27CI1" target="_blank" class="btn whatsapp">
+      <span>WhatsApp</span>
+    </a>
+
+    <a href="https://www.google.com/maps/place/Todo+Cell+Suc.+Guernica/@-34.9170862,-58.3750529,17z/data=!4m8!3m7!1s0x95bd2acba59bfc8b:0x4ae8ae1a5536644f!8m2!3d-34.9170862!4d-58.3750529!9m1!1b1!16s%2Fg%2F11b7ldm55p!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn calificar">
+      <span>Calificar</span>
+    </a>
   </div>
+</div>
 
-  <!-- BOTONES -->
-  <div class="main">
-    <div class="buttons">
+<script>
+// Genera lluvia de iconos en los botones
+function crearIconos(boton, urlIcono, cantidad) {
+  for(let i=0; i<cantidad; i++){
+    const icon = document.createElement('img');
+    icon.src = urlIcono;
+    icon.classList.add('icono');
+    // tamaño aleatorio entre 12px y 30px
+    const size = Math.random() * 18 + 12;
+    icon.style.width = size + 'px';
+    icon.style.height = size + 'px';
+    // posición aleatoria dentro del botón
+    icon.style.top = Math.random() * 100 + '%';
+    icon.style.left = Math.random() * 100 + '%';
+    // rotación aleatoria
+    icon.style.transform = 'translate(-50%, -50%) rotate(' + (Math.random()*360) + 'deg)';
+    boton.appendChild(icon);
+  }
+}
 
-      <a href="https://www.instagram.com/todocellshop?igsh=YjNlbzV1OHY0Yzk0" target="_blank" class="btn instagram">
-        <span>Instagram</span>
-      </a>
-
-      <a href="https://wa.me/message/VSOKBXLUE27CI1" target="_blank" class="btn whatsapp">
-        <span>WhatsApp</span>
-      </a>
-
-      <a href="https://www.google.com/maps/place/Todo+Cell+Suc.+Guernica/@-34.9170862,-58.3750529,17z/data=!4m8!3m7!1s0x95bd2acba59bfc8b:0x4ae8ae1a5536644f!8m2!3d-34.9170862!4d-58.3750529!9m1!1b1!16s%2Fg%2F11b7ldm55p!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn calificar">
-        <span>Calificar</span>
-      </a>
-
-    </div>
-  </div>
+window.onload = function(){
+  crearIconos(document.querySelector('.instagram'), 'icono-instagram.png', 20);
+  crearIconos(document.querySelector('.whatsapp'), 'icono-whatsapp.png', 20);
+  crearIconos(document.querySelector('.calificar'), 'estrella-google.png', 25);
+};
+</script>
 
 </body>
 </html>
