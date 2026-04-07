@@ -4,47 +4,62 @@
 <meta charset="UTF-8">
 <title>Todo Cell Shop</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   overflow: hidden;
-  background: url('fondo-pc.jpg') no-repeat center center;
-  background-size: cover;
+  position: relative;
+  height: 100vh;
 }
 
+/* Fondo principal */
+#fondo-principal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url('fondo-pc.jpg') no-repeat center center;
+  background-size: cover;
+  z-index: 0;
+  transition: background 0.5s ease;
+}
 @media (max-width: 768px) {
-  body {
+  #fondo-principal {
     background: url('fondo-mobile.jpg') no-repeat center center;
     background-size: cover;
   }
 }
 
-body::before {
-  content: "";
+/* Fondo inicial splash responsive */
+#fondo-inicial {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.55);
-  top: 0;
-  left: 0;
-  z-index: 0;
+  background: url('fondo-splash-pc.jpg') no-repeat center center;
+  background-size: cover;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+@media (max-width: 768px) {
+  #fondo-inicial {
+    background: url('fondo-splash-mobile.jpg') no-repeat center center;
+    background-size: cover;
+  }
 }
 
+/* Splash logo */
 .splash {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.7);
   z-index: 2;
   animation: fadeOut 2s ease forwards;
   animation-delay: 2s;
 }
-
 .splash img {
   width: 280px;
   height: 280px;
@@ -52,10 +67,11 @@ body::before {
   border-radius: 50%;
 }
 
+/* Contenido principal (botones) */
 .main {
   opacity: 0;
   position: relative;
-  z-index: 1;
+  z-index: 3;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -64,6 +80,7 @@ body::before {
   animation-delay: 3s;
 }
 
+/* Botones */
 .buttons {
   width: 80%;
   max-width: 320px;
@@ -72,7 +89,6 @@ body::before {
   gap: 15px;
 }
 
-/* BOTONES */
 .btn {
   text-decoration: none;
   text-align: center;
@@ -84,23 +100,11 @@ body::before {
   position: relative;
   overflow: hidden;
 }
+.btn span { position: relative; z-index: 2; }
 
-.btn span {
-  position: relative;
-  z-index: 2;
-}
-
-.instagram {
-  background-color: #E1306C;
-}
-
-.whatsapp {
-  background-color: #1A9E42; /* un verde más oscuro para que los iconos resalten */
-}
-
-.calificar {
-  background-color: #4285F4;
-}
+.instagram { background-color: #E1306C; }
+.whatsapp { background-color: #1A9E42; } /* más oscuro */
+.calificar { background-color: #4285F4; }
 
 /* Hover */
 .btn:hover {
@@ -108,69 +112,76 @@ body::before {
   transition: 0.3s;
 }
 
-/* Animaciones */
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
-}
-@keyframes showMain {
-  to { opacity: 1; }
-}
+/* Animaciones generales */
+@keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+@keyframes showMain { to { opacity: 1; } }
 
-/* Iconos dispersos */
+/* Iconos dispersos y flotantes */
 .icono {
   position: absolute;
   pointer-events: none;
   opacity: 0.7;
+  animation: flotar 3s ease-in-out infinite alternate;
+}
+@keyframes flotar {
+  0% { transform: translate(-50%, -50%) translateY(0px) rotate(0deg); }
+  50% { transform: translate(-50%, -50%) translateY(-5px) rotate(10deg); }
+  100% { transform: translate(-50%, -50%) translateY(5px) rotate(-10deg); }
 }
 </style>
 </head>
-
 <body>
 
+<!-- Fondo principal -->
+<div id="fondo-principal"></div>
+
+<!-- Fondo inicial splash responsive -->
+<div id="fondo-inicial"></div>
+
+<!-- Splash -->
 <div class="splash">
   <img src="logo.png" alt="Logo">
 </div>
 
+<!-- Botones principales -->
 <div class="main">
   <div class="buttons">
-    <a href="https://www.instagram.com/todocellshop?igsh=YjNlbzV1OHY0Yzk0" target="_blank" class="btn instagram">
-      <span>Instagram</span>
-    </a>
-
-    <a href="https://wa.me/message/VSOKBXLUE27CI1" target="_blank" class="btn whatsapp">
-      <span>WhatsApp</span>
-    </a>
-
-    <a href="https://www.google.com/maps/place/Todo+Cell+Suc.+Guernica/@-34.9170862,-58.3750529,17z/data=!4m8!3m7!1s0x95bd2acba59bfc8b:0x4ae8ae1a5536644f!8m2!3d-34.9170862!4d-58.3750529!9m1!1b1!16s%2Fg%2F11b7ldm55p!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn calificar">
-      <span>Calificar</span>
-    </a>
+    <a href="https://www.instagram.com/todocellshop" target="_blank" class="btn instagram"><span>Instagram</span></a>
+    <a href="https://wa.me/message/VSOKBXLUE27CI1" target="_blank" class="btn whatsapp"><span>WhatsApp</span></a>
+    <a href="https://www.google.com/maps/place/Todo+Cell+Suc.+Guernica/" target="_blank" class="btn calificar"><span>Calificar</span></a>
   </div>
 </div>
 
 <script>
-// Genera lluvia de iconos en los botones
-function crearIconos(boton, urlIcono, cantidad) {
+// Función para crear iconos dispersos y flotantes
+function crearIconos(boton, urlIcono, cantidad, minSize=12, maxSize=30){
   for(let i=0; i<cantidad; i++){
     const icon = document.createElement('img');
     icon.src = urlIcono;
     icon.classList.add('icono');
-    // tamaño aleatorio entre 12px y 30px
-    const size = Math.random() * 18 + 12;
+    const size = Math.random() * (maxSize - minSize) + minSize;
     icon.style.width = size + 'px';
     icon.style.height = size + 'px';
-    // posición aleatoria dentro del botón
     icon.style.top = Math.random() * 100 + '%';
     icon.style.left = Math.random() * 100 + '%';
-    // rotación aleatoria
+    icon.style.animationDuration = (2 + Math.random()*2) + 's';
     icon.style.transform = 'translate(-50%, -50%) rotate(' + (Math.random()*360) + 'deg)';
     boton.appendChild(icon);
   }
 }
 
+// Ejecutar al cargar
 window.onload = function(){
-  crearIconos(document.querySelector('.instagram'), 'icono-instagram.png', 20);
-  crearIconos(document.querySelector('.whatsapp'), 'icono-whatsapp.png', 20);
-  crearIconos(document.querySelector('.calificar'), 'estrella-google.png', 25);
+  crearIconos(document.querySelector('.instagram'), 'icono-instagram.png', 20, 12, 30);
+  crearIconos(document.querySelector('.whatsapp'), 'icono-whatsapp.png', 20, 12, 30);
+  crearIconos(document.querySelector('.calificar'), 'estrella-google.png', 25, 25, 40);
+
+  // Desaparece el fondo inicial suavemente
+  setTimeout(() => {
+    const fondo = document.getElementById('fondo-inicial');
+    fondo.style.opacity = 0;
+    setTimeout(() => { fondo.style.display = 'none'; }, 1000);
+  }, 2500);
 };
 </script>
 
